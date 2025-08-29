@@ -1,6 +1,7 @@
 package online.agatstudio.demo.service;
 
 import lombok.AllArgsConstructor;
+import online.agatstudio.demo.exception.UserNotFoundException;
 import online.agatstudio.demo.model.User;
 import online.agatstudio.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,11 @@ public class UserService {
     }
 
     public User getById(long id) {
-        return userRepository.getById(id);
+        User user = userRepository.getById(id);
+        if (user == null) {
+            throw new UserNotFoundException("User with id %d not found".formatted(id));
+        }
+        return user;
     }
 
     public Collection<User> getAll() {
