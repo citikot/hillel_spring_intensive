@@ -1,5 +1,6 @@
 package online.agatstudio.demo.controller;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import online.agatstudio.demo.model.User;
 import online.agatstudio.demo.service.UserService;
@@ -28,7 +29,8 @@ public class UserController {
     public User getById(@PathVariable long id) {return userService.getById(id);}
 
     @GetMapping("/all")
-    public Collection<User> getAll() {return userService.getAll();}
+    @Timed(value = "endpoint.users.all", description = "Time spent on endpoint /users/all")
+    public Collection<User> getAll() throws InterruptedException {return userService.getAll();}
 
     @PostMapping("/add")
     public void add(@RequestBody User user) {

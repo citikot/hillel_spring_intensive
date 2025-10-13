@@ -33,7 +33,8 @@ public class UserService {
         return user;
     }
 
-    public Collection<User> getAll() {
+    public Collection<User> getAll() throws InterruptedException {
+        Thread.sleep(500);
         return userRepository.getAll();
     }
 }
