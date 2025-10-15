@@ -15,12 +15,13 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void add(User user) {
-        userRepository.add(user);
+        userRepository.create(user);
     }
 
     public void update(User user) {
         userRepository.update(user);
     }
+
     public void remove(long id) {
         userRepository.remove(id);
     }
@@ -33,8 +34,7 @@ public class UserService {
         return user;
     }
 
-    public Collection<User> getAll() throws InterruptedException {
-        Thread.sleep(500);
+    public Collection<User> getAll() {
         return userRepository.getAll();
     }
 }

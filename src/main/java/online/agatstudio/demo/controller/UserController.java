@@ -1,10 +1,14 @@
 package online.agatstudio.demo.controller;
 
-import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import online.agatstudio.demo.model.User;
 import online.agatstudio.demo.service.UserService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
@@ -26,11 +30,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable long id) {return userService.getById(id);}
+    public User getById(@PathVariable long id) {
+        return userService.getById(id);
+    }
 
     @GetMapping("/all")
-    @Timed(value = "endpoint.users.all", description = "Time spent on endpoint /users/all")
-    public Collection<User> getAll() throws InterruptedException {return userService.getAll();}
+    public Collection<User> getAll() throws InterruptedException {
+        return userService.getAll();
+    }
 
     @PostMapping("/add")
     public void add(@RequestBody User user) {
