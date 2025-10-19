@@ -16,11 +16,11 @@ public class UserRepositoryInMemory implements UserRepository {
     private static final Map<Long, User> users = new HashMap<>();
 
     public void create(User user) {
-        users.put(user.id(), user);
+        users.put(user.getId(), user);
     }
 
     public void update(User user) {
-        users.computeIfPresent(user.id(), (k, v) -> user);
+        users.computeIfPresent(user.getId(), (k, v) -> user);
     }
 
     public void remove(long id) {

@@ -17,22 +17,22 @@ public class UserRepositoryJDBC implements UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     public void create(User user) {
-        String sql = "INSERT INTO users (name) VALUES (?)";
-        jdbcTemplate.update(sql, user.name());
+        String sql = "INSERT INTO user (name) VALUES (?)";
+        jdbcTemplate.update(sql, user.getName());
     }
 
     public void update(User user) {
-        String sql = "UPDATE users SET name = ? WHERE id = ?";
-        jdbcTemplate.update(sql, user.name(), user.id());
+        String sql = "UPDATE user SET name = ? WHERE id = ?";
+        jdbcTemplate.update(sql, user.getName(), user.getId());
     }
 
     public void remove(long id) {
-        String sql = "DELETE FROM users WHERE id = ?";
+        String sql = "DELETE FROM user WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 
     public User getById(long id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT * FROM user WHERE id = ?";
         try {
             return jdbcTemplate.queryForObject(
                     sql,
@@ -46,7 +46,7 @@ public class UserRepositoryJDBC implements UserRepository {
 
 
     public Collection<User> getAll() {
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT * FROM user";
         return jdbcTemplate.query(
                 sql,
                 (rs, rowNum) -> new User(rs.getLong("id"), rs.getString("name"))
