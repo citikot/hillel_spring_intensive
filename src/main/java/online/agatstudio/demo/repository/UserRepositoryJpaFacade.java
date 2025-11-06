@@ -1,6 +1,6 @@
 package online.agatstudio.demo.repository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import online.agatstudio.demo.exception.UserNotFoundException;
 import online.agatstudio.demo.model.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 
 @Component
-@AllArgsConstructor
 @ConditionalOnProperty(name = "data.store.type", havingValue = "JPA")
+@RequiredArgsConstructor
 public class UserRepositoryJpaFacade implements UserRepository {
 
     private final UserRepositoryJpa userRepositoryJpa;
